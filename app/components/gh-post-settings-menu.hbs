@@ -6,7 +6,7 @@
     <div id="entry-controls">
         <div class="settings-menu settings-menu-pane settings-menu-pane-main">
             <div class="settings-menu-header">
-                <h4>{{capitalize this.post.displayName}} settings</h4>
+                <h4>{{capitalize this.post.displayName}} config</h4>
             </div>
             <div class="settings-menu-content">
                 <form>
@@ -16,11 +16,11 @@
                     {{#unless this.post.isNew}}
                         {{#if (or this.post.isPublished this.post.isSent)}}
                         <a class="post-view-link" target="_blank" href="{{this.post.url}}">
-                            View {{this.post.displayName}} {{svg-jar "external"}}
+                            Ver {{this.post.displayName}} {{svg-jar "external"}}
                         </a>
                         {{else if this.post.isScheduled}}
                         <a class="post-view-link" target="_blank" href="{{this.post.previewUrl}}">
-                            Preview {{svg-jar "external"}}
+                            Previsualizar {{svg-jar "external"}}
                         </a>
                         {{/if}}
                     {{/unless}}
@@ -45,9 +45,9 @@
 
                 <div class="form-group">
                     {{#if (or this.post.isDraft this.post.isPublished this.post.pastScheduledTime this.post.isSent)}}
-                        <label>Publish date</label>
+                        <label>Fecha de publicacion</label>
                     {{else}}
-                        <label>Scheduled date</label>
+                        <label>Fecha de publicacion programada</label>
                     {{/if}}
                     <GhDateTimePicker
                         @date={{this.post.publishedAtBlogDate}}
@@ -62,13 +62,13 @@
                         @isActive={{not this.isViewingSubview}}
                     />
                     {{#unless (or this.post.isDraft this.post.isPublished this.post.pastScheduledTime this.post.isSent)}}
-                    <p>Use the publish menu to re-schedule</p>
+                    <p>Utiliza el menu de publicacion para re programar</p>
                     {{/unless}}
                 </div>
 
                 {{#unless this.session.user.isContributor}}
                 <div class="form-group">
-                    <label for="tag-input">Tags</label>
+                    <label for="tag-input">Etiquetas</label>
                     <GhPsmTagsInput @post={{this.post}} @triggerId="tag-input" />
                 </div>
                 {{/unless}}
@@ -76,7 +76,7 @@
                 {{#if this.showVisibilityInput}}
                     {{#if (feature "multipleProducts")}}
                         <GhFormGroup @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="visibility">
-                            <label for="visibility-input">{{capitalize @post.displayName}} access</label>
+                            <label for="visibility-input">{{capitalize @post.displayName}} permisos</label>
                             <GhPsmVisibilityInput @post={{this.post}} @triggerId="visibility-input" />
                         </GhFormGroup>
 
@@ -95,7 +95,7 @@
                         {{/if}}
                     {{else}}
                         <div class="form-group">
-                            <label for="visibility-input">Post access</label>
+                            <label for="visibility-input">Permisos de la publicacion</label>
                             <GhPsmVisibilityInput @post={{this.post}} @triggerId="visibility-input" />
                         </div>
                     {{/if}}
@@ -103,7 +103,7 @@
 
 
                 <GhFormGroup @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="customExcerpt">
-                    <label for="custom-excerpt">Excerpt</label>
+                    <label for="custom-excerpt">Extracto</label>
                     <GhTextarea
                         @class="post-setting-custom-excerpt"
                         @id="custom-excerpt"
@@ -119,7 +119,7 @@
 
                 {{#unless this.session.user.isAuthorOrContributor}}
                     <GhFormGroup @class="for-select" @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="authors" data-test-input="authors">
-                        <label for="author-list">Authors</label>
+                        <label for="author-list">Autores</label>
                         <GhPsmAuthorsInput @selectedAuthors={{this.post.authors}} @updateAuthors={{action "changeAuthors"}} @triggerId="author-list" />
                         <GhErrorMessage @errors={{this.post.errors}} @property="authors" data-test-error="authors" />
                     </GhFormGroup>
@@ -128,8 +128,8 @@
                 <ul class="nav-list nav-list-block">
                     <li class="nav-list-item" {{action "showSubview" "meta-data"}} data-test-button="meta-data">
                         <button type="button">
-                            <b>Meta data</b>
-                            <span>Extra content for search engines</span>
+                            <b>Meta datos</b>
+                            <span>Contenido extra para los motores de busqueda</span>
                         </button>
                         {{svg-jar "arrow-right"}}
                     </li>
@@ -160,7 +160,7 @@
                     {{/if}}
                     <li class="nav-list-item" {{action "showSubview" "codeinjection"}} data-test-button="codeinjection">
                         <button type="button">
-                            <b>Code injection</b>
+                            <b>Inyection de codigo</b>
                             <span>Add styles/scripts to the header &amp; footer</span>
                         </button>
                         {{svg-jar "arrow-right"}}
@@ -178,7 +178,7 @@
                             data-test-checkbox="featured"
                         >
                         <span class="input-toggle-component"></span>
-                        <p>Feature this {{this.post.displayName}}</p>
+                        <p>Destacar este {{this.post.displayName}}</p>
                     </label>
                 </div>
                 {{/unless}}
@@ -200,15 +200,15 @@
             <div class="active">
                     {{#if (eq this.subview "meta-data")}}
                         <div class="settings-menu-header subview">
-                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Back</span></button>
-                            <h4>Meta data</h4>
+                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Volver</span></button>
+                            <h4>Meta datos</h4>
                             <div style="width:23px;"></div>
                         </div>
 
                         <div class="settings-menu-content">
                             <form {{action "discardEnter" on="submit"}}>
                                 <GhFormGroup @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="metaTitle">
-                                    <label for="meta-title">Meta title</label>
+                                    <label for="meta-title">Meta titulo</label>
                                     <GhTextInput
                                         @class="post-setting-meta-title"
                                         @id="meta-title"
@@ -219,12 +219,12 @@
                                         @focus-out={{action "setMetaTitle" this.metaTitleScratch}}
                                         @stopEnterKeyDownPropagation={{true}}
                                         data-test-field="meta-title" />
-                                    <p>Recommended: <b>60</b> characters. You’ve used {{gh-count-down-characters this.metaTitleScratch 60}}</p>
+                                    <p>Recomendado: <b>60</b> caracteres. Has utilizado {{gh-count-down-characters this.metaTitleScratch 60}}</p>
                                     <GhErrorMessage @errors={{this.post.errors}} @property="meta-title" />
                                 </GhFormGroup>
 
                                 <GhFormGroup @errors={{this.post.errors}} @hasValidated={{this.post.hasValidated}} @property="metaDescription">
-                                    <label for="meta-description">Meta description</label>
+                                    <label for="meta-description">Meta descripcion</label>
                                     <GhTextarea
                                         @class="post-setting-meta-description"
                                         @id="meta-description"
@@ -235,7 +235,7 @@
                                         @focus-out={{action "setMetaDescription" this.metaDescriptionScratch}}
                                         @stopEnterKeyDownPropagation="true"
                                         data-test-field="meta-description" />
-                                    <p>Recommended: <b>145</b> characters. You’ve used {{gh-count-down-characters this.metaDescriptionScratch 145}}</p>
+                                    <p>Recomendado: <b>145</b> caracteres. Has utilizado {{gh-count-down-characters this.metaDescriptionScratch 145}}</p>
                                     <GhErrorMessage @errors={{this.post.errors}} @property="meta-description" />
                                 </GhFormGroup>
 
@@ -253,7 +253,7 @@
                                 </GhFormGroup>
 
                                 <div class="form-group">
-                                    <label>Search Engine Result Preview</label>
+                                    <label>Previsualizacion del motor de busqueda</label>
                                     <div class="gh-seo-container">
                                         <div class="gh-seo-preview">
                                             <div class="flex mb7">
@@ -272,7 +272,7 @@
 
                     {{#if (eq this.subview "twitter-data")}}
                         <div class="settings-menu-header subview">
-                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Back</span></button>
+                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Volver</span></button>
                             <h4>Twitter card</h4>
                             <div style="width:23px;"></div>
                         </div>
@@ -348,7 +348,7 @@
 
                     {{#if (eq this.subview "facebook-data")}}
                         <div class="settings-menu-header subview">
-                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Back</span></button>
+                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Volver</span></button>
                             <h4>Facebook card</h4>
                             <div style="width:23px;"></div>
                         </div>
@@ -416,8 +416,8 @@
 
                     {{#if (eq this.subview "codeinjection")}}
                         <div class="settings-menu-header subview">
-                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Back</span></button>
-                            <h4>Code injection</h4>
+                            <button aria-label="Back" {{action "closeSubview"}} class="back settings-menu-header-action" data-test-button="close-psm-subview">{{svg-jar "arrow-left"}}<span class="hidden">Volver</span></button>
+                            <h4>inyeccion de Codigo</h4>
                             <div style="width:23px;"></div>
                         </div>
 

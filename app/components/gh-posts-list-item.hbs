@@ -9,10 +9,10 @@
         </h3>
         <p>
             <span class="gh-content-entry-meta">
-                By <span class="midgrey-l2 fw5">{{this.authorNames}}</span>
+                Por <span class="midgrey-l2 fw5">{{this.authorNames}}</span>
 
                 {{#if @post.primaryTag}}
-                    in <span class="midgrey-l2 fw5">{{@post.primaryTag.name}}</span>
+                    en <span class="midgrey-l2 fw5">{{@post.primaryTag.name}}</span>
                 {{/if}}
 
                  • <span data-tooltip="{{gh-format-post-time @post.updatedAtUTC "D MMM YYYY"}}">{{gh-format-post-time @post.updatedAtUTC draft=true}}</span>
@@ -46,7 +46,7 @@
                                 {{@post.email.openRate}}%&nbsp;
                             {{/if}}
                         </span>
-                        <span class="midgrey-l2 fw4 gh-content-email-stats-mobile">{{@post.email.openRate}}% opens</span>
+                        <span class="midgrey-l2 fw4 gh-content-email-stats-mobile">{{@post.email.openRate}}% aperturas</span>
                     </div>
                 {{/if}}
             </LinkTo>
@@ -57,7 +57,7 @@
         <div class="flex items-center">
             {{#if @post.isScheduled}}
             <span class="gh-content-status-scheduled gh-badge nowrap" title="Scheduled" data-tooltip="{{capitalize this.scheduledText}} to {{@post.emailRecipientFilter}} members">
-                Scheduled
+                Programado
                 {{#if @post.emailRecipientFilter}}
                 {{svg-jar "email-stroke"}}
                 {{/if}}
@@ -66,13 +66,13 @@
 
             {{#if @post.isDraft}}
             <span class="gh-content-status-draft gh-badge gh-badge-pink nowrap">
-                Draft
+                Borrador
             </span>
             {{/if}}
 
             {{#if @post.isPublished}}
             <span class="gh-content-status-published nowrap">
-                Published
+                Publicado
                 {{#if @post.hasEmail}}
                 {{svg-jar "email-stroke"}}
                 {{/if}}

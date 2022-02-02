@@ -72,11 +72,11 @@ export default Component.extend({
         let state = this.postState;
 
         if (state === 'published') {
-            return 'Update';
+            return 'Actualizar';
         } else if (state === 'scheduled') {
-            return 'Scheduled';
+            return 'Programar';
         } else {
-            return 'Publish';
+            return 'Publicar';
         }
     }),
 
@@ -86,18 +86,18 @@ export default Component.extend({
         let runningText;
 
         if (postState === 'draft') {
-            runningText = saveType === 'publish' ? 'Publishing' : 'Scheduling';
+            runningText = saveType === 'publish' ? 'Publicando' : 'Programando';
         }
 
         if (postState === 'published') {
-            runningText = saveType === 'publish' ? 'Updating' : 'Unpublishing';
+            runningText = saveType === 'publish' ? 'Actualizando' : 'Despublicando';
         }
 
         if (postState === 'scheduled') {
-            runningText = saveType === 'schedule' ? 'Rescheduling' : 'Unscheduling';
+            runningText = saveType === 'schedule' ? 'Reprogramando' : 'Desprogramando';
         }
 
-        return runningText || 'Publishing';
+        return runningText || 'Publicando';
     }),
 
     buttonText: computed('postState', 'saveType', 'distributionAction', 'sendEmailWhenPublished', function () {
@@ -113,30 +113,30 @@ export default Component.extend({
                     buttonText = 'Publish';
 
                     if (this.canSendEmail && this.sendEmailWhenPublished && this.sendEmailWhenPublished !== 'none') {
-                        buttonText = `${buttonText} & send`;
+                        buttonText = `${buttonText} & enviar`;
                     }
                 } else {
                     buttonText = 'Schedule';
                 }
                 break;
             case 'publish':
-                buttonText = (saveType === 'publish') ? 'Publish' : 'Schedule';
+                buttonText = (saveType === 'publish') ? 'Publicado' : 'Programado';
                 break;
             case 'send':
-                buttonText = saveType === 'publish' ? 'Send' : 'Schedule';
+                buttonText = saveType === 'publish' ? 'Enviado' : 'Programado';
                 break;
             }
         }
 
         if (postState === 'published') {
-            buttonText = saveType === 'publish' ? 'Update' : 'Unpublish';
+            buttonText = saveType === 'publish' ? 'Actualizar' : 'Despublicar';
         }
 
         if (postState === 'scheduled') {
-            buttonText = saveType === 'schedule' ? 'Reschedule' : 'Unschedule';
+            buttonText = saveType === 'schedule' ? 'Reprogramar' : 'Dar de baja el progrmado';
         }
 
-        return buttonText || 'Publish';
+        return buttonText || 'Publicar';
     }),
 
     successText: computed('_previousStatus', 'postState', function () {
@@ -145,15 +145,15 @@ export default Component.extend({
         let buttonText;
 
         if (previousStatus === 'draft') {
-            buttonText = postState === 'published' ? 'Published' : 'Scheduled';
+            buttonText = postState === 'published' ? 'Publicado' : 'Programado';
         }
 
         if (previousStatus === 'published') {
-            buttonText = postState === 'draft' ? 'Unpublished' : 'Updated';
+            buttonText = postState === 'draft' ? 'Despublicado' : 'Actualizado';
         }
 
         if (previousStatus === 'scheduled') {
-            buttonText = postState === 'draft' ? 'Unscheduled' : 'Rescheduled';
+            buttonText = postState === 'draft' ? 'Desprogramado' : 'Reprogramado';
         }
 
         return buttonText;

@@ -71,7 +71,7 @@
                 @onTitleChange={{action "updateTitleScratch"}}
                 @onTitleBlur={{action (perform this.saveTitleTask)}}
                 @body={{readonly this.post.scratch}}
-                @bodyPlaceholder={{concat "Begin writing your " this.post.displayName "..."}}
+                @bodyPlaceholder={{concat "Comienza a escribir el contenido " this.post.displayName "..."}}
                 @onBodyChange={{action "updateScratch"}}
                 @headerOffset={{editor.headerHeight}}
                 @scrollContainerSelector=".gh-koenig-editor"

@@ -1,6 +1,6 @@
 <section class="gh-canvas">
     <GhCanvasHeader class="gh-canvas-header break tablet post-header">
-        <GhCustomViewTitle @title="Posts" @query={{reset-query-params "posts"}} />
+        <GhCustomViewTitle @title="Publicaciones" @query={{reset-query-params "posts"}} />
 
         <section class="view-actions">
             <GhContentfilter
@@ -22,7 +22,7 @@
                 @onOrderChange={{action "changeOrder"}}
             />
 
-            <LinkTo @route="editor.new" @model="post" class="gh-btn gh-btn-primary view-actions-top-row" data-test-new-post-button={{true}}><span>New post</span></LinkTo>
+            <LinkTo @route="editor.new" @model="post" class="gh-btn gh-btn-primary view-actions-top-row" data-test-new-post-button={{true}}><span>Nueva Publicacion</span></LinkTo>
         </section>
     </GhCanvasHeader>
 
@@ -30,14 +30,14 @@
         <ol class="posts-list gh-list {{unless this.postsInfinityModel "no-posts"}}">
             {{#if this.postsInfinityModel}}
                 <li class="gh-list-row header">
-                    <div class="gh-list-header gh-posts-title-header">Title</div>
+                    <div class="gh-list-header gh-posts-title-header">Titulo</div>
                     {{#if (not-eq this.settings.editorDefaultEmailRecipients "disabled")}}
                         {{#if this.feature.emailAnalytics}}
-                            <div class="gh-list-header gh-posts-sends-header">Sends</div>
-                            <div class="gh-list-header gh-posts-opens-header">Opens</div>
+                            <div class="gh-list-header gh-posts-sends-header">Enviados</div>
+                            <div class="gh-list-header gh-posts-opens-header">Abiertos</div>
                         {{/if}}
                     {{/if}}
-                    <div class="gh-list-header gh-posts-status-header">Status</div>
+                    <div class="gh-list-header gh-posts-status-header">Estado</div>
                 </li>
             {{/if}}
 
@@ -50,14 +50,14 @@
                 <div class="no-posts">
                     {{#if this.showingAll}}
                         {{svg-jar "posts-placeholder" class="gh-posts-placeholder"}}
-                        <h3>You haven't written any posts yet!</h3>
+                        <h3>Todavia no has agregado ningun contenido</h3>
                         <LinkTo @route="editor.new" @model="post" class="gh-btn gh-btn-green gh-btn-lg">
-                            <span>Write a new post</span>
+                            <span>Escribir una nueva publicacion</span>
                         </LinkTo>
                     {{else}}
-                        <h3>No posts match the current filter</h3>
+                        <h3>Ninguna publicacion fue encontrada</h3>
                         <LinkTo @route="posts" @query={{hash type=null author=null tag=null}} class="gh-btn gh-btn-lg">
-                            <span>Show all posts</span>
+                            <span>Motrar todas las publicaciones</span>
                         </LinkTo>
                     {{/if}}
                 </div>

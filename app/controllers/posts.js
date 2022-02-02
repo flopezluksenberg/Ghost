@@ -5,44 +5,44 @@ import {computed, get} from '@ember/object';
 import {inject as service} from '@ember/service';
 
 const TYPES = [{
-    name: 'All posts',
+    name: 'Todo',
     value: null
 }, {
-    name: 'Draft posts',
+    name: 'Borradores',
     value: 'draft'
 }, {
-    name: 'Published posts',
+    name: 'Contenido ya publicado',
     value: 'published'
 }, {
-    name: 'Scheduled posts',
+    name: 'Publicaciones Programadas',
     value: 'scheduled'
 }, {
-    name: 'Featured posts',
+    name: 'Publicaciones Especiales',
     value: 'featured'
 }];
 
 const VISIBILITIES = [{
-    name: 'All access',
+    name: 'Acceso Total',
     value: null
 }, {
-    name: 'Public',
+    name: 'Publico',
     value: 'public'
 }, {
-    name: 'Members-only',
+    name: 'Solo Miembros',
     value: 'members'
 }, {
-    name: 'Paid members-only',
+    name: 'Solo Miembros Premium',
     value: 'paid'
 }];
 
 const ORDERS = [{
-    name: 'Newest',
+    name: 'Los mas nuevos',
     value: null
 }, {
-    name: 'Oldest',
+    name: 'Los mas viejos',
     value: 'published_at asc'
 }, {
-    name: 'Recently updated',
+    name: 'Actualizados recientemente',
     value: 'updated_at desc'
 }];
 
@@ -70,9 +70,9 @@ export default Controller.extend({
         this.availableVisibilities = VISIBILITIES;
         this.setProperties(DEFAULT_QUERY_PARAMS.posts);
 
-        if (this.feature.get('emailAnalytics') && !this.availableOrders.findBy('name', 'Open rate')) {
+        if (this.feature.get('emailAnalytics') && !this.availableOrders.findBy('name', 'Indicador de Aperturas')) {
             this.availableOrders.push({
-                name: 'Open rate',
+                name: 'Indicador de Aperturas',
                 value: 'email.open_rate desc'
             });
         }
@@ -110,7 +110,7 @@ export default Controller.extend({
             .filter(tag => tag.get('id') !== null)
             .sort((tagA, tagB) => tagA.name.localeCompare(tagB.name, undefined, {ignorePunctuation: true}));
         let options = tags.toArray();
-        options.unshiftObject({name: 'All tags', slug: null});
+        options.unshiftObject({name: 'Todas las etiquetas', slug: null});
 
         return options;
     }),
@@ -130,7 +130,7 @@ export default Controller.extend({
         let authors = this._availableAuthors;
         let options = authors.toArray();
 
-        options.unshiftObject({name: 'All authors', slug: null});
+        options.unshiftObject({name: 'Todos los Autores', slug: null});
 
         return options;
     }),

@@ -122,7 +122,7 @@
 }
 
 .gh-contentfilter-sort .gh-contentfilter-menu-trigger .ember-power-select-selected-item::before {
-    content: "Sort by: ";
+    content: "Ordenar Por: ";
 }
 
 .gh-contentfilter-actions svg {
@@ -419,7 +419,7 @@
     }
 
     .gh-post-list-author:before {
-        content: "- by";
+        content: "- por";
     }
 
     .gh-post-headers,
