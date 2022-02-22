@@ -1,6 +1,11 @@
-<div class="gh-flow">
-    <div class="gh-flow-content-wrap">
-        <section class="gh-flow-content">
+<div class="gh-flow" style="background: #e1e1e1">
+    <div class="gh-flow-content-wrap" style="margin: 0; width: 100vw; height: 100vh; overflow: hidden; padding: 0; background: white;">
+        <section style="width: 50vw; height: 100vh; position: relative;" >
+            <img src="assets/img/login-background.jpg" srcset="assets/img/login-background.jpg 1x, assets/img/login-background.jpg 2x" style="width: 100%; height: 100%; object-fit: cover;"  />
+            <img src="assets/img/img-logo.png" srcset="assets/img/img-logo.png 1x, assets/img/img-logo.png 2x" style="position: absolute; left: 10px; top: 10px; z-index: 2;" />
+            <div style="display: block; width: 100%; height: 100%; position: absolute; left:0; top:0; background: black; opacity: 0.2; z-index: 1;"></div>
+        </section>
+        <section class="gh-flow-content" style="width: 50vw; max-width: 100%;">
             {{#if this.passwordResetEmailSent}}
                 <div class="gh-auth-email">
                     <div class="gh-auth-animation-container">
@@ -19,29 +24,16 @@
                     </div>
                 </div>
             {{else}}
+            <header>
+                <h1 style="font-size: 24px;font-weight: bold;">Ingreso al sistema como administrador</h1>
+            </header>
             <form id="login" method="post" class="gh-signin" novalidate="novalidate" {{action "authenticate" on="submit"}}>
-                <header>
-                    <div class="gh-site-icon" style="{{this.siteIconStyle}}"></div>
-                    <h1>Sign in to {{this.config.blogTitle}}.</h1>
-                </header>
-                {{#if this.config.oauth}}
-                    <a
-                        href="oauth/google"
-                        class="login gh-btn gh-btn-login gh-btn-block gh-btn-white gh-btn-icon gh-center">
-                        <span style="color: #15171a;">{{svg-jar "google-favicon"}}Sign in with Google</span>
-                    </a>
-
-                    <div class="gh-separator">
-                        or
-                    </div>
-                {{/if}}
                 <GhFormGroup @errors={{this.signin.errors}} @hasValidated={{this.hasValidated}} @property="identification">
-                    <label>Email address</label>
                     <span class="gh-input-icon gh-icon-mail">
                         <GhTrimFocusInput
                             @class="email"
                             @type="email"
-                            @placeholder="jamie@example.com"
+                            @placeholder="Ingrese su email"
                             @name="identification"
                             @autocapitalize="off"
                             @autocorrect="off"
@@ -50,22 +42,24 @@
                             @value={{readonly this.signin.identification}}
                             @input={{action (mut this.signin.identification) value="target.value"}}
                             @focus-out={{action "validate" "identification"}}
+                            style="border: none;background: transparent;border-radius: 0;border-bottom: 1px solid gray;font-size: 14px;height: 40px; padding: 4px;"
                         />
                     </span>
                 </GhFormGroup>
                 <GhFormGroup @errors={{this.signin.errors}} @hasValidated={{this.hasValidated}} @property="password">
-                    <label>Password</label>
                     <span class="gh-input-icon gh-icon-lock forgotten-wrap">
                         <GhTextInput
                             @class="password"
                             @type="password"
-                            @placeholder="•••••••••••••••"
+                            @placeholder="Ingrese su clave"
                             @name="password"
                             @tabindex="2"
                             @autocomplete="current-password"
                             @autocorrect="off"
                             @value={{readonly this.signin.password}}
-                            @input={{action (mut this.signin.password) value="target.value"}} />
+                            @input={{action (mut this.signin.password) value="target.value"}}
+                            style="border: none;background: transparent;border-radius: 0;border-bottom: 1px solid gray;font-size: 14px;height: 40px; padding: 4px;"
+                        />
 
                         <GhTaskButton
                             @task={{this.forgotten}}
@@ -76,18 +70,18 @@
                             @failureClass=""
                             as |task|
                         >
-                            <span>{{#if task.isRunning}}{{svg-jar "spinner" class="gh-spinner"}}{{else}}Forgot?{{/if}}</span>
+                            <span>{{#if task.isRunning}}{{svg-jar "spinner" class="gh-spinner"}}{{else}}¿Olvido su clave?{{/if}}</span>
                         </GhTaskButton>
                     </span>
                 </GhFormGroup>
 
-                <GhTaskButton @buttonText="Sign in &rarr;"
+                <GhTaskButton @buttonText="Iniciar Sesión"
                     @task={{this.validateAndAuthenticate}}
                     @showSuccess={{false}}
                     @class="login gh-btn gh-btn-login gh-btn-block gh-btn-icon js-login-button"
                     @type="submit"
                     @tabindex="3"
-                    style="background: {{this.accentColor}};" />
+                    style="background: #170D63; color: white; font-weight: bold; font-size: 14px; width: fit-content; margin: 40px auto; box-shadow: 4px 4px 8px #bbb7b78f;" />
             </form>
 
             <p class="main-error">{{if this.flowErrors this.flowErrors}}&nbsp;</p>
